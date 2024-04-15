@@ -1,0 +1,17 @@
+[package]
+name = "ll_backend"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"]}
+tokio = { version = "1", features = ["full"] }
+warp = "0.3"
+serde_json = "1.0"
+uuid = "0.8"
+log = "0.4.21"
+axum = "0.7.5"
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
