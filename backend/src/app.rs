@@ -4,9 +4,9 @@ use std::{
     io::{Read, Write},
 };
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct App {
-    books: Vec<String>,
+    pub books: Vec<String>,
 }
 
 impl App {
