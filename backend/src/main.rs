@@ -1,12 +1,17 @@
+pub mod books;
+pub mod app;
+
 use warp::Filter;
 
 #[tokio::main]
 async fn main() {
-    // GET /hello/warp => 200 OK with body "Hello, warp!"
-    let hello = warp::path!("hello" / String)
-        .map(|name| format!("Hello, {}!", name));
+    let apiV = warp::path!("api").map(|| "api version 0.1");
+    let cdnV = warp::path!("cdn").map(|| "cdn version 0.1");
+    let app = App::init();
 
-    warp::serve(hello)
+    warp::serve(apiV)
         .run(([127, 0, 0, 1], 3030))
         .await;
+
+    app.deinit();
 }
