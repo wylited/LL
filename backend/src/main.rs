@@ -99,8 +99,7 @@ async fn post_resources(Path(isbn): Path<u64>, Json(resource): Json<Resource>) -
 }
 
 async fn post_resource_file(
-    Path(isbn): Path<u64>,
-    Path(resource_id): Path<String>,
+    Path((isbn, resource_id)): Path<(u64, String)>,
     body: Body,
 ) -> (StatusCode, Json<String>) {
     let file_bytes = to_bytes(body, usize::MAX).await.unwrap();
