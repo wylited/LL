@@ -4,9 +4,12 @@
   
       <div v-if="error" class="error">{{ error }} <p>TEST11231</p></div>
   
-      <div v-if="post" class="content">        
+      <div v-if="post" class="content"> 
+        {{ console.log("POST") }}
+        {{ console.log(post) }}  
+        {{ console.log(post.isbn) }}     
         <p class = "vardec">{{ x = "/books/" + post.isbn }}</p>
-        <RouterLink :to = x >
+        <RouterLink class = "linky" :to = x >
           <div class = "bookDisplay">
             <p class = "bkTitle">{{ post.title }}</p>
             <img class = "bookImg" :src=post.image_url alt="Paris"> 
@@ -19,20 +22,33 @@
 
   <style scoped>
 
+  .linky:hover {
+    background-color: red;
+  }
+
   .vardec {
     display:none;
   }
 
   .bookImg {
     width:200px;
+    border-radius: 10px;
   }
 
   .bkTitle {
     text-align: center;
+    color:white;
+    font-family: "Spectral", serif;
+    font-weight: 400;
+    font-style: normal;
   }
 
   .bookDisplay {
     text-align: center;
+  }
+
+  RouterLink {
+    background-color: red;
   }
   
   </style>
@@ -70,17 +86,19 @@
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
+                console.log("Begin Fetch")
+                console.log(response)
                 return response.json();
                 })
                 .then(data => {
                 this.post = data[0]
-                console.log("BRUH")
+                
                 console.log(data)
+                console.log("End Fetch")
                 })
                 .catch(error => {
                 console.error('Error:', error);
                 });
-          this.post = await fetch("http://188.166.250.75:3000/api/books")
         } catch (err) {
           this.error = err.toString()
         } finally {

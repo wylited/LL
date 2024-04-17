@@ -31,6 +31,7 @@
   font-size: medium;
   color:rgb(79, 214, 158);
   padding:.5vw 2vw;
+  text-decoration: none;
 }
 
 .search {
