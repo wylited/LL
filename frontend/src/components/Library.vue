@@ -1,5 +1,5 @@
 
-<script setup lang="ts">
+<script setup>
 
 import { defineAsyncComponent } from 'vue'
 

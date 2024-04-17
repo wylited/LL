@@ -7,23 +7,40 @@
       <div v-if="post" class="content"> 
         {{ console.log("POST") }}
         {{ console.log(post) }}  
-        {{ console.log(post.isbn) }}     
-        <p class = "vardec">{{ x = "/books/" + post.isbn }}</p>
+        {{ console.log(post['isbn']) }}     
+        <p class = "vardec">{{ x = "/books/" + post['isbn'] }}</p>
         <RouterLink class = "linky" :to = x >
           <div class = "bookDisplay">
-            <p class = "bkTitle">{{ post.title }}</p>
+            <p class = "bkTitle">{{ post['title'] }}</p>
             <img class = "bookImg" :src=post.image_url alt="Paris"> 
           </div>
         </RouterLink>
         
-      </div>
+        </div>
+        
+      
     </div>
+    <RouterLink class = "new" to = "/addbook">
+          <p>add book!</p>
+        </RouterLink>
   </template>
 
   <style scoped>
 
+  .new {
+    display: inline-block;
+    margin-left:3vw;
+  }
+
+  .linky {
+    display: inline-block;
+  }
+
   .linky:hover {
-    background-color: red;
+    border-radius: 10px;
+    transition-duration: .4s;
+    background-color: rgb(82, 82, 82);
+
   }
 
   .vardec {
@@ -54,7 +71,7 @@
   </style>
 
 
-  <script>  
+  <script lang="ts">  
   export default {
     data() {
       return {

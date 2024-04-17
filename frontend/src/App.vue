@@ -1,6 +1,6 @@
 <template>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <nav>
     <h1 class="title inl">Untitled Project</h1>
@@ -34,9 +34,6 @@
   text-decoration: none;
 }
 
-.search {
-
-}
 
 nav {
   display: inline-block;

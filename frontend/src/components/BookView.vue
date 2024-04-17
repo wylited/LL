@@ -7,13 +7,13 @@
       <div v-if="post" class="content">        
         {{ post.title }}
         <p class = "vardec">{{ x = "/books/" + post.isbn }}</p>
-        <p>TEST</p>
-        <RouterLink :to = x >Go to Home</RouterLink>
+        <p>TESTETSTEST</p>
+
       </div>
     </div>
   </template>
   
-  <script>  
+  <script lang="ts">  
   export default {
     data() {
       return {
