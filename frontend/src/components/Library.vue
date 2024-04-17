@@ -43,14 +43,9 @@ window.onload = function() {
 <template>
   <div class = "main">
     <div class = "topBar">
-      <h1 class="title">Untitled Project</h1>
-      <div class = "searchBar">
-        <asyncModal></asyncModal>
-        <p>search bar goes here :skull: (feels weird here but idk what else to put in this space)</p>
-      </div>
     </div>
     <div id = "books" class = "library">
-      <p id = "loading">Loading...</p>
+      <asyncModal></asyncModal>
     </div>
   </div>
 </template>
@@ -74,7 +69,8 @@ window.onload = function() {
 .library {
   display: flex;
   margin: 2% 4.5%;
-  background-color: red;
+  background-color: grey;
+  border-radius: 2vw;
   min-height: 80vh;
   min-width: 100%;
   padding:3vw;
@@ -89,11 +85,5 @@ window.onload = function() {
   width:100%;
 }
 
-.title {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  display: inline-block;
-}
 
 </style>
