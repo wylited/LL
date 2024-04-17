@@ -10,12 +10,22 @@
     </div>
   </nav>
   <main>
-    <router-view :key="$route.path"></router-view>
+    <router-view v-slot="{ Component }":key="$route.path">
+
+    </router-view>
   </main>
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
 
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 .title {
   text-decoration: none;
   font-size:2vw;

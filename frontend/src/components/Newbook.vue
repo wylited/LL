@@ -1,15 +1,29 @@
 
 <template>
-    <div>
+    <div class = "menu">
         <p>NEW</p>
-        <p>Message is: {{ message }}</p>
-        <input v-model="message" placeholder="edit me" />
-      <input type="email" v-model="email" />
-  
-      <button @click="submit">Submit</button>
+        <p>Book Title is: {{ bookTitle }}</p>
+        <p>Message is: {{ email }}</p>
+        <p>Message is: {{ email }}</p>
+        <input class = "inp" type="bookTitle" v-model="bookTitle" />
+        <input class = "inp" type="email" v-model="email" />
+    
+        <button @click="submit">Submit</button>
     </div>
   </template>
   
+<style>
+
+  .menu {
+    display: block;
+  }
+
+  .inp {
+    display: block;
+  }
+
+</style>
+
   <script>
     
 import { ref } from 'vue'
@@ -19,7 +33,8 @@ const message = ref('')
   export default {
     data() {
       return {
-        email: ''
+        email: '',
+        bookTitle: ''
       }
     },
     methods: {
@@ -29,3 +44,4 @@ const message = ref('')
     }
   }
   </script>
+  
