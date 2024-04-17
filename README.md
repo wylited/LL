@@ -1,4 +1,4 @@
-# Undecided product name - Leveraged Liabilities
+# Learners Library - Leveraged Liabilities
 A hackathon project made for CIS Hackathon 2024, centerred about using technology to improve the quality of education.
 
 ## Setup and Installation
