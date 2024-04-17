@@ -18,28 +18,52 @@
         
         </div>
         
-      
+        
     </div>
-    <RouterLink class = "new" to = "/addbook">
-          <p>add book!</p>
+    <RouterLink class = "new linky" to = "/addbook">
+          <p class = "addtxt">Add a Book</p>
+          <img class ="plus" src = "https://cdn-icons-png.flaticon.com/512/7598/7598663.png" alt ="plus" >
         </RouterLink>
   </template>
 
   <style scoped>
 
+  .addtxt {
+    text-align: center;
+    color:white;
+  }
+
+  .plus {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+    margin:2vw;
+    margin-top:50%;
+  }
+
   .new {
     display: inline-block;
     margin-left:3vw;
+    min-height:310px;
+    max-height: 240px;
+    min-width:150px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
   }
 
   .linky {
     display: inline-block;
+    transition-duration: .4s;
+    
+    border-radius: 10px;
   }
 
   .linky:hover {
-    border-radius: 10px;
-    transition-duration: .4s;
     background-color: rgb(82, 82, 82);
+    
 
   }
 
