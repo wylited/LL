@@ -1,9 +1,12 @@
 use axum::{
-    extract::{Path, Json},
-    routing::get,
-    Router, http::{StatusCode, Response}, body::{to_bytes, Body},
+    body::{to_bytes, Body},
+    extract::{Json, Path},
+    http::{Response, StatusCode},
+    routing::{get, post},
+    Router,
 };
 use serde::{Deserialize, Serialize};
+use tower_http::cors::CorsLayer;
 use std::{collections::HashMap, fs, path::Path as FilePath};
 use tracing::info;
 
@@ -16,6 +19,15 @@ struct Book {
 }
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
+struct FullBook {
+    isbn: u64,
+    title: String,
+    authors: Vec<String>,
+    image_url: Option<String>,
+    resources: Vec<Resource>,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
 struct Resource {
     id: String,
     book_isbn: u64,
@@ -23,6 +35,7 @@ struct Resource {
     author: String,
     description: String,
     file_name: String,
+    collab_score: i64,
 }
 
 #[tokio::main]
@@ -47,6 +60,7 @@ async fn main() {
             author: "Dhairya Shah".to_string(),
             description: "This is an example resource".to_string(),
             file_name: "test.txt".to_string(),
+            collab_score: 0,
         };
         let books: Vec<Book> = vec![example_book.clone()];
         let books_json = serde_json::to_string(&books).unwrap();
@@ -60,10 +74,20 @@ async fn main() {
     let app = Router::new()
         .route("/api/books", get(get_books).post(post_book))
         .route("/api/books/:isbn", get(get_book))
-        .route("/api/resources/:isbn", get(get_resources).post(post_resources))
-        .route("/api/resources/:isbn/:id", get(get_resource_file).post(post_resource_file));
+        .route("/api/fullbooks", get(get_fullbooks))
+        .route(
+            "/api/resources/:isbn",
+            get(get_resources).post(post_resources),
+        )
+        .route(
+            "/api/resources/:isbn/:id",
+            get(get_resource_file).post(post_resource_file),
+        )
+        .route("/api/resources/:isbn/:id/:score", post(post_collab_score))
+        .layer(CorsLayer::permissive());
+
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    info!("Starting server on http://localhost:3030");
+    info!("Starting server on http://localhost:3000");
     axum::serve(listener, app).await.unwrap();
 }
 
@@ -75,11 +99,30 @@ async fn get_book(Path(isbn): Path<u64>) -> Json<Book> {
     Json(load_book(isbn))
 }
 
+async fn get_fullbooks() -> Json<Vec<FullBook>> {
+    let books = load_books();
+    let mut full_books = Vec::new();
+    for book in books.iter() {
+        let resources = load_resources(book.isbn);
+        full_books.push(FullBook {
+            isbn: book.isbn,
+            title: book.title.clone(),
+            authors: book.authors.clone(),
+            image_url: book.image_url.clone(),
+            resources,
+        });
+    }
+    Json(full_books)
+}
+
 async fn get_resources(Path(isbn): Path<u64>) -> Json<Vec<Resource>> {
     Json(load_resources(isbn))
 }
 
-async fn get_resource_file(Path(isbn): Path<u64>, Path(resource_id): Path<String>) -> Response<Body> {
+async fn get_resource_file(
+    Path(isbn): Path<u64>,
+    Path(resource_id): Path<String>,
+) -> Response<Body> {
     Response::new(Body::from(load_resource_file(isbn, resource_id)))
 }
 
@@ -89,7 +132,10 @@ async fn post_book(Json(book): Json<Book>) -> (StatusCode, Json<Book>) {
     (StatusCode::CREATED, Json(book))
 }
 
-async fn post_resources(Path(isbn): Path<u64>, Json(resource): Json<Resource>) -> (StatusCode, Json<Resource>) {
+async fn post_resources(
+    Path(isbn): Path<u64>,
+    Json(resource): Json<Resource>,
+) -> (StatusCode, Json<Resource>) {
     info!("Received resource: {:?}", resource);
     if isbn != resource.book_isbn {
         return (StatusCode::BAD_REQUEST, Json(resource));
@@ -105,6 +151,24 @@ async fn post_resource_file(
     let file_bytes = to_bytes(body, usize::MAX).await.unwrap();
     save_resource_file(isbn, resource_id.clone(), file_bytes.to_vec());
     (StatusCode::CREATED, Json(resource_id))
+}
+
+async fn post_collab_score(
+    Path((isbn, resource_id, resource_score)): Path<(u64, String, i64)>,
+) -> StatusCode {
+    let mut resources = load_resources(isbn);
+    for resource in resources.iter_mut() {
+        if resource.id == resource_id {
+            resource.collab_score = resource_score;
+            let resource_json = serde_json::to_string(&resource).unwrap();
+            let resource_path = format!("{}/{}.json", isbn, resource.id);
+            fs::write(resource_path, resource_json).unwrap();
+            info!("Updated resource: {:?}", resource);
+            return StatusCode::CREATED;
+        }
+    }
+    info!("Resource not found");
+    return StatusCode::BAD_REQUEST;
 }
 
 fn load_books() -> Vec<Book> {
@@ -129,7 +193,7 @@ fn load_resources(isbn: u64) -> Vec<Resource> {
     resources
 }
 
-fn load_resource_file(isbn: u64, resource_id: String) -> Vec<u8>{
+fn load_resource_file(isbn: u64, resource_id: String) -> Vec<u8> {
     let resources_dir = format!("{}", isbn);
     let resource_path = format!("{}/{}.json", resources_dir, resource_id);
     if !FilePath::new(&resource_path).exists() {
