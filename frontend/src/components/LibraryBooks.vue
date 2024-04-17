@@ -1,6 +1,6 @@
 <template>
     <div class="post">
-      <div v-if="loading" class="loading">Loading...</div>
+      <div v-if="loading" class="loading">Lasdasdoading...</div>
   
       <div v-if="error" class="error">{{ error }} <p>TEST11231</p></div>
   

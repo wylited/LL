@@ -4,8 +4,11 @@
   
       <div v-if="error" class="error">{{ error }} <p>TEST11231</p></div>
   
-      <div v-if="post" class="content">        
+      <div v-if="post" class="content"> 
+        {{ console.log("TES") }}
+        {{ console.log(post) }}        
         {{ post.title }}
+        
         <p class = "vardec">{{ x = "/books/" + post.isbn }}</p>
         <p>TEST</p>
         <RouterLink :to = x >Go to Home</RouterLink>
@@ -39,9 +42,8 @@
   
         try {
           // replace `getPost` with your data fetching util / API wrapper
-            const apiUrl = 'http://188.166.250.75:3000/api/books/' + this.$route.params.isbn;
+            const apiUrl = 'http://188.166.250.75:3000/api/fullbooks';
             console.log(apiUrl)
-
             fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
@@ -50,13 +52,24 @@
                 return response.json();
             })
             .then(data => {
-                this.post = data
+                console.log("BRUH!!!")
                 console.log(data)
+                data.forEach((book) => {
+                    if (book.isbn==this.$route.params.isbn) {
+                        this.post = book
+                        console.log("SUCCESS")
+                        console.log(book)
+                    }
+                    else {
+                        console.log("FAIL")
+                        console.log(book.isbn)
+                        console.log( this.$route.params.isbn)
+                    }
+                });
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-          this.post = await fetch("http://188.166.250.75:3000/api/books")
         } catch (err) {
           this.error = err.toString()
         } finally {
