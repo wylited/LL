@@ -1,8 +1,10 @@
+Here's the updated API specification with the new code changes:
+
 # Books and Resources API Specification
 
 ## Overview
 
-The Books and Resources API allows you to manage books and their associated resources. It provides endpoints for retrieving, creating, and updating books and resources.
+The Books and Resources API allows you to manage books and their associated resources. It provides endpoints for retrieving, creating, and updating books, resources, and resource collaboration scores.
 
 ## Endpoints
 
@@ -21,15 +23,6 @@ The Books and Resources API allows you to manage books and their associated reso
         "K. A. Tsokos"
       ],
       "image_url": "https://m.media-amazon.com/images/I/31McpVemeXL.jpg"
-    },
-    {
-      "isbn": 9780198390022,
-      "title": "IB Chemistry Coursebook",
-      "authors": [
-        "Sergey Bylikin",
-        "Christopher Talbot"
-      ],
-      "image_url": "https://m.media-amazon.com/images/I/51j9V7HEYAL.jpg"
     }
   ]
 }
@@ -51,6 +44,35 @@ The Books and Resources API allows you to manage books and their associated reso
 }
 ```
 
+### Get Full Books (with Resources)
+
+**Endpoint**: `GET /api/fullbooks`
+
+**Response**:
+```json
+[
+  {
+    "isbn": 9781009071888,
+    "title": "IB Physics Coursebook",
+    "authors": [
+      "K. A. Tsokos"
+    ],
+    "image_url": "https://m.media-amazon.com/images/I/31McpVemeXL.jpg",
+    "resources": [
+      {
+        "id": "1",
+        "book_isbn": 9781009071888,
+        "title": "Ex. resource",
+        "author": "Dhairya Shah",
+        "description": "This is an example resource",
+        "file_name": "test.txt",
+        "collab_score": 0
+      }
+    ]
+  }
+]
+```
+
 ### Get Resources for a Book
 
 **Endpoint**: `GET /api/resources/{isbn}`
@@ -64,15 +86,8 @@ The Books and Resources API allows you to manage books and their associated reso
     "title": "Ex. resource",
     "author": "Dhairya Shah",
     "description": "This is an example resource",
-    "file_name": "test.txt"
-  },
-  {
-    "id": "2",
-    "book_isbn": 9781009071888,
-    "title": "Another Resource",
-    "author": "Jane Doe",
-    "description": "This is another resource",
-    "file_name": "another.pdf"
+    "file_name": "test.txt",
+    "collab_score": 0
   }
 ]
 ```
@@ -125,7 +140,8 @@ The Books and Resources API allows you to manage books and their associated reso
   "title": "Another Resource",
   "author": "Jane Doe",
   "description": "This is another resource",
-  "file_name": "another.pdf"
+  "file_name": "another.pdf",
+  "collab_score": 0
 }
 ```
 
@@ -137,7 +153,8 @@ The Books and Resources API allows you to manage books and their associated reso
   "title": "Another Resource",
   "author": "Jane Doe",
   "description": "This is another resource",
-  "file_name": "another.pdf"
+  "file_name": "another.pdf",
+  "collab_score": 0
 }
 ```
 
@@ -152,6 +169,15 @@ The Books and Resources API allows you to manage books and their associated reso
 "2"
 ```
 
+### Update a Resource Collaboration Score
+
+**Endpoint**: `POST /api/resources/{isbn}/{resource_id}/{score}`
+
+**Response**:
+```
+Status Code: 201 Created
+```
+
 ## Error Handling
 
 The API will return appropriate HTTP status codes and error messages for any invalid requests or server-side errors.
@@ -162,4 +188,4 @@ This API does not currently have any authentication or authorization mechanisms.
 
 ## Conclusion
 
-This API allows you to manage books and their associated resources. You can retrieve, create, and update books and resources using the provided endpoints. If you have any further questions or need more information, please don't hesitate to ask.
+This API allows you to manage books and their associated resources, including the ability to retrieve, create, and update books, resources, and resource collaboration scores. If you have any further questions or need more information, please don't hesitate to ask.
