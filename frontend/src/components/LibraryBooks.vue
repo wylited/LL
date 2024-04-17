@@ -4,19 +4,40 @@
   
       <div v-if="error" class="error">{{ error }} <p>TEST11231</p></div>
   
-      <div v-if="post" class="content">
-        <p>sdasdas</p>
+      <div v-if="post" class="content">        
+        <p class = "vardec">{{ x = "/books/" + post.isbn }}</p>
+        <RouterLink :to = x >
+          <div class = "bookDisplay">
+            <p class = "bkTitle">{{ post.title }}</p>
+            <img class = "bookImg" :src=post.image_url alt="Paris"> 
+          </div>
+        </RouterLink>
         
-
-        {{ post.title }}
-        {{ x = "/books/" + post.isbn }}
-        {{console.log(post.title)}}
-        <p>TEST</p>
-        <RouterLink :to = x >Go to Home</RouterLink>
       </div>
     </div>
   </template>
+
+  <style scoped>
+
+  .vardec {
+    display:none;
+  }
+
+  .bookImg {
+    width:200px;
+  }
+
+  .bkTitle {
+    text-align: center;
+  }
+
+  .bookDisplay {
+    text-align: center;
+  }
   
+  </style>
+
+
   <script>  
   export default {
     data() {
@@ -69,3 +90,4 @@
     },
   }
   </script>
+
