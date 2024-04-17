@@ -36,6 +36,7 @@ struct Resource {
     description: String,
     file_name: String,
     collab_score: i64,
+    page_number: u32,
 }
 
 #[tokio::main]
@@ -60,6 +61,7 @@ async fn main() {
             author: "Dhairya Shah".to_string(),
             description: "This is an example resource".to_string(),
             file_name: "test.txt".to_string(),
+            page_number: 13,
             collab_score: 0,
         };
         let books: Vec<Book> = vec![example_book.clone()];

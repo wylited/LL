@@ -66,6 +66,7 @@ The Books and Resources API allows you to manage books and their associated reso
         "author": "Dhairya Shah",
         "description": "This is an example resource",
         "file_name": "test.txt",
+        "page_number": "12",
         "collab_score": 0
       }
     ]
@@ -87,6 +88,7 @@ The Books and Resources API allows you to manage books and their associated reso
     "author": "Dhairya Shah",
     "description": "This is an example resource",
     "file_name": "test.txt",
+    "page_number": "12",
     "collab_score": 0
   }
 ]
@@ -141,6 +143,7 @@ The Books and Resources API allows you to manage books and their associated reso
   "author": "Jane Doe",
   "description": "This is another resource",
   "file_name": "another.pdf",
+  "page_number": "12",
   "collab_score": 0
 }
 ```
@@ -154,6 +157,7 @@ The Books and Resources API allows you to manage books and their associated reso
   "author": "Jane Doe",
   "description": "This is another resource",
   "file_name": "another.pdf",
+  "page_number": "12",
   "collab_score": 0
 }
 ```
