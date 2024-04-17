@@ -120,9 +120,7 @@ async fn get_resources(Path(isbn): Path<u64>) -> Json<Vec<Resource>> {
 }
 
 async fn get_resource_file(
-    Path(isbn): Path<u64>,
-    Path(resource_id): Path<String>,
-) -> Response<Body> {
+    Path((isbn, resource_id)): Path<(u64, String)>) -> Response<Body> {
     Response::new(Body::from(load_resource_file(isbn, resource_id)))
 }
 
