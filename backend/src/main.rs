@@ -184,6 +184,11 @@ fn load_resources(isbn: u64) -> Vec<Resource> {
     let mut resources = Vec::new();
     for entry in fs::read_dir(resources_dir).unwrap() {
         let path = entry.unwrap().path();
+
+        if path.extension().unwrap() != "json" {
+            continue;
+        }
+
         let resource_json = fs::read_to_string(path).unwrap();
         let resource: Resource = serde_json::from_str(&resource_json).unwrap();
         resources.push(resource);
