@@ -5,16 +5,16 @@
       <div v-if="error" class="error">{{ error }} <p>TEST11231</p></div>
   
       <div v-if="post" class="content"> 
-        {{ console.log("POST") }}
-        {{ console.log(post) }}  
-        {{ console.log(post['isbn']) }}     
-        <p class = "vardec">{{ x = "/books/" + post['isbn'] }}</p>
-        <RouterLink class = "linky" :to = x >
-          <div class = "bookDisplay">
-            <p class = "bkTitle">{{ post['title'] }}</p>
-            <img class = "bookImg" :src=post.image_url alt="Paris"> 
-          </div>
-        </RouterLink>
+        <li v-for="book in post">
+          <p class = "vardec">{{ x = "/books/" + book['isbn'] }}</p>
+          <RouterLink class = "linky" :to = x >
+            <div class = "bookDisplay">
+              <p class = "bkTitle">{{ book['title'] }}</p>
+              <img class = "bookImg" :src=book.image_url alt="Paris"> 
+            </div>
+          </RouterLink>
+        </li>   
+        
         
         </div>
         
@@ -27,6 +27,12 @@
   </template>
 
   <style scoped>
+
+  li {
+    list-style-type: none;
+    display: inline-block;
+    padding:0 1vw;
+  }
 
   .addtxt {
     text-align: center;
@@ -132,7 +138,7 @@
                 return response.json();
                 })
                 .then(data => {
-                this.post = data[0]
+                this.post = data
                 
                 console.log(data)
                 console.log("End Fetch")

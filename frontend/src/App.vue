@@ -3,7 +3,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <nav>
-    <h1 class="title inl">Untitled Project</h1>
+    <h1 class="title inl">Learner's Library</h1>
     <RouterLink class = "inl link" to="/">Your Library</RouterLink>
     <div class = "inl search">
       <p> Search Bar Goes Here </p>

@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"> 
 
     <div class="post">
+        
       <div v-if="loading" class="loading">Loading...</div>
   
       <div v-if="error" class="error">{{ error }} <p>TEST11231</p></div>
@@ -16,8 +17,30 @@
         <div class = "mainBod">
             <h2 class = "title">{{ post['title'] }}</h2>
             <p class = "author">{{ post['authors'][0] }}, {{ post['isbn'] }}</p>
+            <h4>Total number of resources: {{ post['resources'].length }}</h4>
 
             <h2 class = "sub">Add a Contribution</h2>
+
+            <div class = "left">
+                <div class = "inpSchema">
+                    <p>Add the title of your resource</p>
+                    <input placeholder = "Title" class = "inp" type="title" v-model="title" />
+                    <p>Add a description to your resource</p>
+                    <input placeholder = "Description" class = "inp" type="desc" v-model="desc" />
+                    <p>Upload your file</p>
+                    <input placeholder = "file" class = "inp" type="file"/>
+                    <p>What is your name?</p>
+                    <input placeholder = "Author" class = "inp" type="author" v-model="author" />
+                </div>
+            </div>
+            <div class = "preview">
+                <h2>Preview</h2>
+                <h3>: {{ title }}</h3>
+                <p>Description: {{ desc }}</p>
+                <p>Submitted by {{ author }}</p>
+            </div>
+
+            <h2 class = "sub">View all Contributions</h2>
         </div>
 
       </div>
@@ -71,13 +94,16 @@
 
 </style>
   
-  <script lang="ts">  
+<script lang="ts">  
   export default {
     data() {
       return {
         loading: false,
         post: null,
         error: null,
+        desc: '',
+        title: '',
+        author:''
       }
     },
     created() {
@@ -131,6 +157,12 @@
           this.loading = false
         }
       },
+      submit() {
+        console.log(this.bookISBN)
+        axios.post('http://188.166.250.75:3000/api/books', { isbn: parseInt(this.bookISBN), title: this.bookTitle, authors: [this.bookAuthor], image_url: this.bookimgURL })
+        .then(response => console.log(response))
+        console.log('posted fr (i hope)')
+        },
     },
   }
-  </script>
+</script>
