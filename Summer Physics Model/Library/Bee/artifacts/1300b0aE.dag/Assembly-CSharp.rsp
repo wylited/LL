@@ -386,6 +386,7 @@
 "Assets/ARUI.cs"
 "Assets/ImageTracker.cs"
 "Assets/Orbit.cs"
+"Assets/Resource Load.cs"
 "Assets/RotateAround.cs"
 "Assets/Slider.cs"
 -langversion:9.0

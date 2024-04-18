@@ -14,8 +14,6 @@ public class ARUI : MonoBehaviour
     bool earthScaled = false;
     Vector3 earthScaleOg;
 
-    bool marsScaled = false;
-    Vector3 marsScaleOg;
 
 
 

@@ -1066,6 +1066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArPrefabs:
   - {fileID: 4064600025048958644, guid: 879a95379a5454046a9ed296ec63a5fc, type: 3}
+  - {fileID: 34530042649954887, guid: 0586537c6042f0e449f6ab57eb9578ac, type: 3}
 --- !u!114 &1186359223
 MonoBehaviour:
   m_ObjectHideFlags: 0

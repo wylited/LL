@@ -27,3 +27,13 @@ MonoBehaviour:
     m_SpecifySize: 0
     m_Name: System
     m_Texture: {fileID: 2800000, guid: 7c8cf76eb318eeb478982fc1843de896, type: 3}
+  - m_SerializedGuid:
+      m_GuidLow: 5423193006289523622
+      m_GuidHigh: 6876689030924595866
+    m_SerializedTextureGuid:
+      m_GuidLow: 13341000909778535308
+      m_GuidHigh: 10192222254587919768
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: Spring
+    m_Texture: {fileID: 2800000, guid: cf83438cc1a4b924983d8bcc230c728d, type: 3}
