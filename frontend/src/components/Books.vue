@@ -41,9 +41,9 @@
             </div>
             <div class = "preview">
                 <h2>Preview</h2>
-                <h3>: {{ title }}</h3>
-                <p>Description: {{ desc }}</p>
-                <p>Submitted by {{ author }}</p>
+                <h3>{{ title }}</h3>
+                <p>{{ desc }}</p>
+                <p class = "bot">Submitted by {{ author }}</p>
                 <img :src = selectedFile>
             </div>
 
@@ -74,6 +74,11 @@
 
 
 <style scoped>
+
+.bot {
+    font-style: italic;
+    margin-top:40%;
+}
 
 .to {
     display:inline-block;
@@ -121,6 +126,7 @@ h1 {
 .preview {
     background-color: rgb(41, 41, 41);
     min-width:30vw;
+    min-height:30vw;
     margin-left:7vw;
     border-radius: 10px;
     padding:1vw;
