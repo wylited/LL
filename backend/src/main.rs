@@ -5,9 +5,12 @@ use axum::{
     routing::{get, post},
     Router,
 };
+
+
+
 use serde::{Deserialize, Serialize};
 use tower_http::cors::CorsLayer;
-use std::{collections::HashMap, fs, path::Path as FilePath};
+use std::{collections::HashMap, fs, path::Path as FilePath, process::Command, io::Read};
 use tracing::info;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -85,6 +88,7 @@ async fn main() {
             "/api/resources/:isbn/:id",
             get(get_resource_file).post(post_resource_file),
         )
+        .route("/api/resources/:isbn/:id/image", get(get_resource_image))
         .route("/api/resources/:isbn/:id/:score", post(post_collab_score))
         .layer(CorsLayer::permissive());
 
@@ -124,6 +128,58 @@ async fn get_resources(Path(isbn): Path<u64>) -> Json<Vec<Resource>> {
 async fn get_resource_file(
     Path((isbn, resource_id)): Path<(u64, String)>) -> Response<Body> {
     Response::new(Body::from(load_resource_file(isbn, resource_id)))
+}
+
+async fn get_resource_image(
+    Path((isbn, resource_id)): Path<(u64, String)>) -> Response<Body> {
+    // check if the file is a .txt, if so convert it to an image, otherwise require it to be a jpeg
+    let resource = load_resources(isbn).into_iter().find(|r| r.id == resource_id).unwrap();
+    let resource_file = load_resource_file(isbn, resource_id.clone());
+    if resource_file.is_empty() {
+        return Response::builder()
+            .status(StatusCode::NOT_FOUND)
+            .body(Body::empty())
+            .unwrap();
+    }
+    if resource.file_name.ends_with(".txt") {
+        let text = String::from_utf8(resource_file).unwrap();
+        let image_data = text_to_image(text).await;
+        return Response::new(Body::from(image_data));
+    } else if resource.file_name.ends_with(".jpg") {
+        return Response::new(Body::from(resource_file));
+    }
+    Response::builder()
+            .status(StatusCode::BAD_REQUEST)
+            .body(Body::empty())
+            .unwrap()
+}
+
+
+async fn text_to_image(text_file: String) -> Vec<u8> {
+let _ = Command::new("convert")
+        .args([
+            "-background",
+            "black",
+            "-fill",
+            "white",
+            "-border",
+            "10",
+            "-bordercolor",
+            "black",
+            "-pointsize",
+            "24",
+            &("label:@".to_owned() + &text_file),
+            "output.jpg",
+        ])
+        .output()
+        .expect("Failed to execute command.");
+
+    let mut file = fs::File::open("output.jpg").expect("Failed to open file");
+    let mut buffer = Vec::new();
+    file.read_to_end(&mut buffer).expect("Failed to read file");
+
+    fs::remove_file("output.jpg").expect("Failed to delete file");
+    buffer
 }
 
 async fn post_book(Json(book): Json<Book>) -> (StatusCode, Json<Book>) {
@@ -168,7 +224,7 @@ async fn post_collab_score(
         }
     }
     info!("Resource not found");
-    return StatusCode::BAD_REQUEST;
+    StatusCode::BAD_REQUEST
 }
 
 fn load_books() -> Vec<Book> {
@@ -228,10 +284,13 @@ fn save_book(book: Book) {
     info!("Saving book: {:?}", book);
     let books = load_books();
     let mut books_map: HashMap<u64, Book> = books.into_iter().map(|b| (b.isbn, b)).collect();
-    books_map.insert(book.isbn, book);
+    books_map.insert(book.isbn, book.clone());
     let books_vec: Vec<Book> = books_map.into_values().collect();
     let books_json = serde_json::to_string(&books_vec).unwrap();
     fs::write("books.json", books_json).unwrap();
+    // make a new directory called the isbn
+    let resources_dir = format!("{}", book.isbn);
+    fs::create_dir_all(resources_dir).unwrap();
     info!("Book saved");
 }
 
