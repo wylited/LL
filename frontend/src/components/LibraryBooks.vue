@@ -9,7 +9,7 @@
           <p class = "vardec">{{ x = "/books/" + book['isbn'] }}</p>
           <RouterLink class = "linky" :to = x >
             <div class = "bookDisplay">
-              <p class = "bkTitle">{{ book['title'] }}</p>
+              <p class = "bkTitle">{{ book.title }}</p>
               <img class = "bookImg" :src=book.image_url alt="Paris"> 
             </div>
           </RouterLink>
@@ -44,15 +44,12 @@
     margin-right: auto;
     width: 80px;
     margin:2vw;
-    margin-top:50%;
+    margin-top:40%;
   }
 
   .new {
+    margin-left:1vw;
     display: inline-block;
-    margin-left:3vw;
-    min-height:310px;
-    max-height: 240px;
-    min-width:150px;
     justify-content: center;
     text-align: center;
     border-radius: 10px;
@@ -61,10 +58,13 @@
   }
 
   .linky {
+    height:310px;
+    width:200px;
     display: inline-block;
     transition-duration: .4s;
-    
     border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
   }
 
   .linky:hover {
@@ -79,6 +79,7 @@
 
   .bookImg {
     width:200px;
+    height:260px;
     border-radius: 10px;
   }
 
@@ -92,6 +93,7 @@
 
   .bookDisplay {
     text-align: center;
+    
   }
 
   RouterLink {
