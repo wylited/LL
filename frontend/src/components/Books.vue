@@ -28,9 +28,15 @@
                     <p>Add a description to your resource</p>
                     <input placeholder = "Description" class = "inp" type="desc" v-model="desc" />
                     <p>Upload your file</p>
-                    <input placeholder = "file" class = "inp" type="file"/>
+                    <input
+                        type="file"
+                        @change="Images_onFileChanged($event)"
+                        accept="image/*"
+                        capture
+                    />
                     <p>What is your name?</p>
                     <input placeholder = "Author" class = "inp" type="author" v-model="author" />
+                    <button @click="submit">Submit</button>
                 </div>
             </div>
             <div class = "preview">
@@ -38,9 +44,15 @@
                 <h3>: {{ title }}</h3>
                 <p>Description: {{ desc }}</p>
                 <p>Submitted by {{ author }}</p>
+                <img :src = selectedFile>
             </div>
 
             <h2 class = "sub">View all Contributions</h2>
+
+            <li v-for="cont in post['resources']">
+            
+                <h3>{{ cont.title }}</h3>
+            </li>
         </div>
 
       </div>
@@ -94,7 +106,9 @@
 
 </style>
   
-<script lang="ts">  
+<script lang="ts"> 
+    import axios, {isCancel, AxiosError} from 'axios';
+    import { ref } from 'vue' 
   export default {
     data() {
       return {
@@ -103,13 +117,14 @@
         error: null,
         desc: '',
         title: '',
-        author:''
+        author:'',
+        selectedFile : null
       }
     },
     created() {
       // watch the params of the route to fetch the data again
       this.$watch(
-        () => this.$route.params.imdb,
+        () => this.$route.params.isbn,
         this.fetchData,
         // fetch the data when the view is created and the data is
         // already being observed
@@ -117,12 +132,13 @@
       )
     },
     methods: {
-      async fetchData(id) {
+    Images_onFileChanged (event) {this.selectedFile = event.target.files[0];console.log("wow");},
+    async fetchData(id) {
         this.error = this.post = null
         this.loading = true
-  
+
         try {
-          // replace `getPost` with your data fetching util / API wrapper
+            // replace `getPost` with your data fetching util / API wrapper
             const apiUrl = 'http://188.166.250.75:3000/api/fullbooks';
             console.log(apiUrl)
             fetch(apiUrl)
@@ -152,15 +168,30 @@
                 console.error('Error:', error);
             });
         } catch (err) {
-          this.error = err.toString()
+            this.error = err.toString()
         } finally {
-          this.loading = false
+            this.loading = false
         }
-      },
-      submit() {
-        console.log(this.bookISBN)
-        axios.post('http://188.166.250.75:3000/api/books', { isbn: parseInt(this.bookISBN), title: this.bookTitle, authors: [this.bookAuthor], image_url: this.bookimgURL })
+    },
+    submit() {
+        function getRandomInt(min, max) {
+            const minCeiled = Math.ceil(min);
+            const maxFloored = Math.floor(max);
+            return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+        }
+
+        const x = getRandomInt(0,100000000)
+        console.log(x,this.$route.params.isbn)
+
+        const y = this.$route.params.isbn
+        const mypostparameters= new FormData()
+        mypostparameters.append('image', this.selectedFile, this.selectedFile.name);
+
+        axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: this.selectedFile.name, page_number: 10, collab_score: 0})
         .then(response => console.log(response))
+        
+        axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn + '/' + x.toString(), mypostparameters)
+        
         console.log('posted fr (i hope)')
         },
     },
