@@ -46,7 +46,8 @@
                 <p class = "bot">Submitted by {{ author }}</p>
                 <img :src = selectedFile>
             </div>
-
+        </div>
+        <div class = "cont">
             <h2 class = "sub">View all Contributions</h2>
             <h4>Total number of resources: {{ post['resources'].length }}</h4>
             <input value = "0" placeholder = "to" class = "to" type="to" v-model="to" />
@@ -65,6 +66,7 @@
                     <h2>bruh</h2>
                 </div>
             </li>
+
         </div>
 
       </div>
@@ -74,6 +76,10 @@
 
 
 <style scoped>
+
+.cont {
+    margin-left:4vw;
+}
 
 .bot {
     font-style: italic;
@@ -164,6 +170,7 @@ h1 {
 .mainBod {
     display: inline-block;
     margin:2vw 4vw;
+    width:65%;
 
 }
 
