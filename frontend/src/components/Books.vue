@@ -57,6 +57,7 @@
                 <div class = "here" v-if="cont.page_number>=to && cont.page_number<=from">
                     <h3 class = "ititle">{{ cont.title }}</h3>
                     <p>{{ cont.description }}</p>
+                    <img v-if="cont.image_url != 'nofileLMAO'" src ="https://google.com"> 
                     <p class = "cont">Contributed by {{ cont.author }}</p>
                     <p>current score is {{ cont.collab_score }}</p>
                     <button @click="AddScore(cont.book_isbn,cont.id,cont.collab_score)">Add 1</button>
@@ -240,7 +241,7 @@ h1 {
         this.loading = true
 
         try {
-            // replace `getPost` with your data fetching util / API wrapper
+            // kill mer
             const apiUrl = 'http://188.166.250.75:3000/api/fullbooks';
             console.log(apiUrl)
             fetch(apiUrl)
