@@ -84,6 +84,7 @@
   }
 
   .bkTitle {
+    text-decoration: none;
     text-align: center;
     color:white;
     font-family: "Spectral", serif;
@@ -97,7 +98,7 @@
   }
 
   RouterLink {
-    background-color: red;
+    text-decoration: none; 
   }
   
   </style>

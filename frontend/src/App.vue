@@ -6,7 +6,8 @@
     <h1 class="title inl">Learner's Library</h1>
     <RouterLink class = "inl link" to="/">Your Library</RouterLink>
     <div class = "inl search">
-      <p> Search Bar Goes Here </p>
+      <input placeholder = "Search for a book or resource!" class = "inp" type="searchq" v-model="searchq" />
+      <button class = "tst" @click="submit">Submit</button>
     </div>
   </nav>
   <main>
@@ -16,16 +17,49 @@
   </main>
 </template>
 
+
+<script>
+    import axios, {isCancel, AxiosError} from 'axios';
+    import { ref } from 'vue'
+
+    const message = ref('')
+
+    export default {
+        data() {
+        return {
+            bookISBN: '',
+        }
+        },
+        methods: {
+        submit() {
+          console.log(this.bookISBN)
+          
+          }
+        }
+    }
+  </script>
+
+
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+
+nav {
+  width:100%;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.search {
+  width:45%;
 }
+
+.tst {
+  display:inline-block;
+}
+
+.inp {
+
+  width:50%;
+  display:inline-block;
+}
+
 .title {
   text-decoration: none;
   font-size:2vw;
