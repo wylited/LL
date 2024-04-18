@@ -183,6 +183,13 @@ fn load_book(isbn: u64) -> Book {
 
 fn load_resources(isbn: u64) -> Vec<Resource> {
     let resources_dir = format!("{}", isbn);
+    // check if resource dir exists, if it doesn't create one.
+
+    if !FilePath::new(&resources_dir).exists() {
+        fs::create_dir_all(&resources_dir).unwrap();
+        info!("Created resources directory: {}", resources_dir);
+    }
+
     let mut resources = Vec::new();
     for entry in fs::read_dir(resources_dir).unwrap() {
         let path = entry.unwrap().path();
