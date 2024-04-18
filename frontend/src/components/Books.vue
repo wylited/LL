@@ -6,7 +6,7 @@
 
     <div class="post">
         
-      <div v-if="loading" class="loading">Loading...</div>
+      <div v-if="loading" class="loading"><h1>Loading...</h1></div>
   
       <div v-if="error" class="error">{{ error }} <p>TEST11231</p></div>
   
@@ -17,7 +17,7 @@
         <div class = "mainBod">
             <h2 class = "title">{{ post['title'] }}</h2>
             <p class = "author">{{ post['authors'][0] }}, {{ post['isbn'] }}</p>
-            <h4>Total number of resources: {{ post['resources'].length }}</h4>
+            
 
             <h2 class = "sub">Add a Contribution</h2>
 
@@ -48,10 +48,16 @@
             </div>
 
             <h2 class = "sub">View all Contributions</h2>
-
-            <li v-for="cont in post['resources']">
+            <h4>Total number of resources: {{ post['resources'].length }}</h4>
+            <li class = "here" v-for="cont in post['resources']">
             
-                <h3>{{ cont.title }}</h3>
+                <h3 class = "ititle">{{ cont.title }}</h3>
+                <p>{{ cont.description }}</p>
+                <p class = "cont">Contributed by {{ cont.author }}</p>
+                <p>current score is {{ cont.collab_score }}</p>
+                <button @click="AddScore(cont.book_isbn,cont.id,cont.collab_score)">Add 1</button>
+                <button @click="RemoveScore(cont.book_isbn,cont.id,cont.collab_score)">Remove 1</button>
+                
             </li>
         </div>
 
@@ -62,6 +68,40 @@
 
 
 <style scoped>
+
+.cont {
+    font-style: italic;
+}
+
+.ititle {
+    color:rgb(28, 31, 0);
+}
+
+.here {
+    list-style: none;
+    display: inline-block;
+    background-color: grey;
+    margin:1vw;
+    min-height:5vw;
+    min-width:10vw;
+    padding:1vw;
+}
+
+
+h1 {
+    color:red;
+    font-size: 40vw;
+}
+
+
+
+.preview {
+    background-color: rgb(41, 41, 41);
+    min-width:30vw;
+    margin-left:7vw;
+    border-radius: 10px;
+    padding:1vw;
+}
 
 .sub {
     margin-top:5vw;
@@ -82,7 +122,7 @@
 }
 
 .title {
-    font-size:2.3vw;
+    font-size:3vw;
     font-family: "Open Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: <weight>;
@@ -100,7 +140,8 @@
 
 .author {
     font-style: italic;
-    margin-top: -1vw;
+    margin-top: -2vw;
+    font-size: 1.3vw;
 }
 
 
@@ -108,6 +149,7 @@
   
 <script lang="ts"> 
     import axios, {isCancel, AxiosError} from 'axios';
+    import { getCurrentInstance } from 'vue';
     import { ref } from 'vue' 
   export default {
     data() {
@@ -133,6 +175,26 @@
     },
     methods: {
     Images_onFileChanged (event) {this.selectedFile = event.target.files[0];console.log("wow");},
+    AddScore(ib,id,score) {
+        this.post.resources.forEach((resc) => {
+            if (resc.id == id) {
+                resc.collab_score += 1;
+            }
+        });
+
+        axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn + '/' + id + '/' + score + 1)
+            .then(response => console.log(response))
+    },
+    RemoveScore(ib,id,score) {
+        this.post.resources.forEach((resc) => {
+            if (resc.id == id) {
+                resc.collab_score -= 1;
+            }
+        });
+
+        axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn + '/' + id + '/' + score - 1)
+            .then(response => console.log(response))
+    },
     async fetchData(id) {
         this.error = this.post = null
         this.loading = true
@@ -183,15 +245,35 @@
         const x = getRandomInt(0,100000000)
         console.log(x,this.$route.params.isbn)
 
-        const y = this.$route.params.isbn
-        const mypostparameters= new FormData()
-        mypostparameters.append('image', this.selectedFile, this.selectedFile.name);
+        
+        console.log("filename:")
+        if (this.selectedFile==null) {
+            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: "nofileLMAO", page_number: 10, collab_score: 0})
+            .then(response => console.log(response))
+        }
+        else {
+            const mypostparameters= new FormData()
+            mypostparameters.append('image', this.selectedFile, this.selectedFile.name);
 
-        axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: this.selectedFile.name, page_number: 10, collab_score: 0})
-        .then(response => console.log(response))
+            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: this.selectedFile.name, page_number: 10, collab_score: 0})
+            .then(response => console.log(response))
+            
+            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn + '/' + x.toString(), mypostparameters)
+        }
         
-        axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn + '/' + x.toString(), mypostparameters)
-        
+        this.post.resources.push({
+        "id": x,
+        "book_isbn": this.post.isbn,
+        "title": this.title,
+        "author": this.author,
+        "description": this.desc,
+        "file_name": "test.txt",
+        "page_number": "12",
+        "collab_score": 0
+      })
+
+
+
         console.log('posted fr (i hope)')
         },
     },

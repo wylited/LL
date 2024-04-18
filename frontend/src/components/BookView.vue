@@ -7,7 +7,7 @@
       <div v-if="post" class="content">        
         {{ post.title }}
         <p class = "vardec">{{ x = "/books/" + post.isbn }}</p>
-        <p>TESTETSTEST</p>
+        <p>TEST</p>
 
       </div>
     </div>
