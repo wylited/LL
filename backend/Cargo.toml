@@ -19,3 +19,4 @@ tower-http = {version = "0.5.2", features = ["cors"]}
 rusttype = "0.9.3"
 image = "0.25.1"
 magick_rust = "0.21.0"
+tokio-util = {version ="0.7.10", features = ["io"]}

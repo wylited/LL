@@ -1,14 +1,16 @@
 use axum::{
     body::{to_bytes, Body},
     extract::{Json, Path},
-    http::{Response, StatusCode},
+    http::{StatusCode, HeaderMap},
     routing::{get, post},
-    Router,
+    Router, response::{IntoResponse},
 };
 
 
 
 use serde::{Deserialize, Serialize};
+
+use tokio_util::io::ReaderStream;
 use tower_http::cors::CorsLayer;
 use std::{collections::HashMap, fs, path::Path as FilePath, process::Command, io::Read};
 use tracing::info;
@@ -126,33 +128,62 @@ async fn get_resources(Path(isbn): Path<u64>) -> Json<Vec<Resource>> {
 }
 
 async fn get_resource_file(
-    Path((isbn, resource_id)): Path<(u64, String)>) -> Response<Body> {
-    Response::new(Body::from(load_resource_file(isbn, resource_id)))
+    Path((isbn, resource_id)): Path<(u64, String)>) -> impl IntoResponse {
+    let resource = load_resources(isbn).into_iter().find(|r| r.id == resource_id).unwrap();
+    let file = load_resource_file(isbn, resource_id).await;
+    let stream = ReaderStream::new(file);
+    let body = Body::from_stream(stream);
+
+    if resource.file_name.ends_with(".txt") {
+        let mut headers = HeaderMap::new();
+        headers.insert("Content-Type", "text/plain; charset=utf-8".parse().unwrap());
+        headers.insert(
+            "Content-Disposition",
+            "attachment; filename=\"resource.txt\"".parse().unwrap(),
+        );
+        return (StatusCode::OK, headers, body);
+    } else {
+        let mut headers = HeaderMap::new();
+        headers.insert("Content-Type", "image/jpeg;".parse().unwrap());
+        headers.insert(
+            "Content-Disposition",
+            // use the filename of the resource
+            "attachment; filename=\"resource.jpg\"".parse().unwrap(),
+        );
+        return (StatusCode::OK, headers, body);
+    }
 }
 
 async fn get_resource_image(
-    Path((isbn, resource_id)): Path<(u64, String)>) -> Response<Body> {
-    // check if the file is a .txt, if so convert it to an image, otherwise require it to be a jpeg
+    Path((isbn, resource_id)): Path<(u64, String)>) -> impl IntoResponse {
     let resource = load_resources(isbn).into_iter().find(|r| r.id == resource_id).unwrap();
-    let resource_file = load_resource_file(isbn, resource_id.clone());
-    if resource_file.is_empty() {
-        return Response::builder()
-            .status(StatusCode::NOT_FOUND)
-            .body(Body::empty())
-            .unwrap();
-    }
+    let file = load_resource_file(isbn, resource_id).await;
     if resource.file_name.ends_with(".txt") {
-        let text = String::from_utf8(resource_file).unwrap();
-        let image_data = text_to_image(text).await;
-        return Response::new(Body::from(image_data));
-    } else if resource.file_name.ends_with(".jpg") {
-        return Response::new(Body::from(resource_file));
+        text_to_image(resource.file_name).await;
+        let imgfile = tokio::fs::File::open("output.jpg").await.unwrap();
+        let stream = ReaderStream::new(imgfile);
+        let body = Body::from_stream(stream);
+        let mut headers = HeaderMap::new();
+        headers.insert("Content-Type", "image/jpeg;".parse().unwrap());
+        headers.insert(
+            "Content-Disposition",
+            "attachment; filename=\"textresource.jpg\"".parse().unwrap(),
+        );
+        (StatusCode::OK, headers, body)
+    } else {
+        let stream = ReaderStream::new(file);
+        let body = Body::from_stream(stream);
+        let mut headers = HeaderMap::new();
+        headers.insert("Content-Type", "image/jpeg;".parse().unwrap());
+        headers.insert(
+            "Content-Disposition",
+            // use the filename of the resource
+            "attachment; filename=\"resource.jpg\"".parse().unwrap(),
+        );
+        (StatusCode::OK, headers, body)
     }
-    Response::builder()
-            .status(StatusCode::BAD_REQUEST)
-            .body(Body::empty())
-            .unwrap()
 }
+
 
 
 async fn text_to_image(text_file: String) -> Vec<u8> {
@@ -168,7 +199,7 @@ let _ = Command::new("convert")
             "black",
             "-pointsize",
             "24",
-            &("label:@".to_owned() + &text_file),
+            &("label:".to_owned() + &text_file),
             "output.jpg",
         ])
         .output()
@@ -177,8 +208,6 @@ let _ = Command::new("convert")
     let mut file = fs::File::open("output.jpg").expect("Failed to open file");
     let mut buffer = Vec::new();
     file.read_to_end(&mut buffer).expect("Failed to read file");
-
-    fs::remove_file("output.jpg").expect("Failed to delete file");
     buffer
 }
 
@@ -261,23 +290,18 @@ fn load_resources(isbn: u64) -> Vec<Resource> {
     resources
 }
 
-fn load_resource_file(isbn: u64, resource_id: String) -> Vec<u8> {
+async fn load_resource_file(isbn: u64, resource_id: String) -> tokio::fs::File {
     let resources_dir = format!("{}", isbn);
     let resource_path = format!("{}/{}.json", resources_dir, resource_id);
-    if !FilePath::new(&resource_path).exists() {
-        return Vec::new();
-    }
+
 
     let resource_json = fs::read_to_string(resource_path).unwrap();
     let resource: Resource = serde_json::from_str(&resource_json).unwrap();
 
     // load the file at {resource_path}/{resource.file_name} and return it if it exists
     let file_path = format!("{}/{}", resources_dir, resource.file_name);
-    if !FilePath::new(&file_path).exists() {
-        return Vec::new();
-    }
 
-    fs::read(file_path).unwrap()
+    tokio::fs::File::open(file_path).await.unwrap()
 }
 
 fn save_book(book: Book) {
