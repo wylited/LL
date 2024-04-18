@@ -1,0 +1,535 @@
+Using pre-set license
+Built from '2022.3/staging' branch; Version is '2022.3.24f1 (334eb2a0b267) revision 3362482'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22631) 64bit Core' Language: 'en' Physical Memory: 16021 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.3.24f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/peter/OneDrive/Documents/Unity+Blender/Physics model
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+53313
+Successfully changed project path to: C:/Users/peter/OneDrive/Documents/Unity+Blender/Physics model
+C:/Users/peter/OneDrive/Documents/Unity+Blender/Physics model
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [38904] Host "[IP] 192.168.31.199 [Port] 0 [Flags] 2 [Guid] 3712868023 [EditorId] 3712868023 [Version] 1048832 [Id] WindowsEditor(7,Guo_Desktop) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [38904] Host "[IP] 192.168.31.199 [Port] 0 [Flags] 2 [Guid] 3712868023 [EditorId] 3712868023 [Version] 1048832 [Id] WindowsEditor(7,Guo_Desktop) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 19 workers.
+Refreshing native plugins compatible for Editor in 21.79 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.24f1 (334eb2a0b267)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.24f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/peter/OneDrive/Documents/Unity+Blender/Physics model/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) Arc(TM) A370M Graphics (ID=0x5693)
+    Vendor:   Intel
+    VRAM:     4018 MB
+    Driver:   31.0.101.4644
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.24f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.24f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.24f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56752
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.24f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.24f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.24f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.007957 seconds.
+- Loaded All Assemblies, in  0.324 seconds
+Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for iOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 234 ms
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.515 seconds
+Domain Reload Profiling: 838ms
+	BeginReloadAssembly (119ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (25ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (50ms)
+	LoadAllAssembliesAndSetupDomain (120ms)
+		LoadAssemblies (117ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (118ms)
+			TypeCache.Refresh (117ms)
+				TypeCache.ScanAssembly (106ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (515ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (470ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (335ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (94ms)
+			ProcessInitializeOnLoadMethodAttributes (36ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.689 seconds
+Refreshing native plugins compatible for Editor in 3.83 ms, found 4 plugins.
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Package Manager log level set to [2]
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+- Finished resetting the current domain, in  0.839 seconds
+Domain Reload Profiling: 1526ms
+	BeginReloadAssembly (113ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (17ms)
+	RebuildCommonClasses (26ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (34ms)
+	LoadAllAssembliesAndSetupDomain (505ms)
+		LoadAssemblies (409ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (164ms)
+			TypeCache.Refresh (141ms)
+				TypeCache.ScanAssembly (126ms)
+			ScanForSourceGeneratedMonoScriptInfo (17ms)
+			ResolveRequiredComponents (5ms)
+	FinalizeReload (840ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (646ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (29ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (59ms)
+			ProcessInitializeOnLoadAttributes (460ms)
+			ProcessInitializeOnLoadMethodAttributes (71ms)
+			AfterProcessingInitializeOnLoad (23ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (19ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 5.38 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4390 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 57 unused Assets / (1.1 MB). Loaded Objects now: 4852.
+Memory consumption went from 164.6 MB to 163.4 MB.
+Total: 8.605100 ms (FindLiveObjects: 0.525400 ms CreateObjectMapping: 0.269400 ms MarkObjects: 6.493300 ms  DeleteObjects: 1.314500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 256711.699817 seconds.
+  path: Assets/DynamicLoader.cs
+  artifactKey: Guid(e82b285cd31092a4eadbf03ba4e8b2e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DynamicLoader.cs using Guid(e82b285cd31092a4eadbf03ba4e8b2e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f45281a423eff240283c75877677802') in 0.010968 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.959 seconds
+Refreshing native plugins compatible for Editor in 3.58 ms, found 4 plugins.
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+- Finished resetting the current domain, in  0.702 seconds
+Domain Reload Profiling: 1653ms
+	BeginReloadAssembly (331ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (12ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (71ms)
+	RebuildCommonClasses (60ms)
+	RebuildNativeTypeToScriptingClass (18ms)
+	initialDomainReloadingComplete (48ms)
+	LoadAllAssembliesAndSetupDomain (493ms)
+		LoadAssemblies (625ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (52ms)
+			TypeCache.Refresh (21ms)
+				TypeCache.ScanAssembly (1ms)
+			ScanForSourceGeneratedMonoScriptInfo (23ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (703ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (367ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (27ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (57ms)
+			ProcessInitializeOnLoadAttributes (239ms)
+			ProcessInitializeOnLoadMethodAttributes (35ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (7ms)
+Refreshing native plugins compatible for Editor in 3.39 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4356 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 37 unused Assets / (1.2 MB). Loaded Objects now: 4856.
+Memory consumption went from 159.8 MB to 158.6 MB.
+Total: 2.927000 ms (FindLiveObjects: 0.181300 ms CreateObjectMapping: 0.082700 ms MarkObjects: 2.238800 ms  DeleteObjects: 0.423500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1872.670104 seconds.
+  path: Assets/physicsimgs
+  artifactKey: Guid(c039ae9573a12c1449e94a9a277041e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs using Guid(c039ae9573a12c1449e94a9a277041e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6c5ad17c48c9a78d423a3d9e79744d4') in 0.003298 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.041142 seconds.
+  path: Assets/physicsimgs/page-012.png
+  artifactKey: Guid(7c8bef1ebbd9cba4ebbe04687f25096c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-012.png using Guid(7c8bef1ebbd9cba4ebbe04687f25096c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1498e264b5d32a352d747707cbaa7701') in 0.107922 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/physicsimgs/page-042.png
+  artifactKey: Guid(987342eafd7e30c44bf247309cebf931) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-042.png using Guid(987342eafd7e30c44bf247309cebf931) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c471a1b8cdb1d1f502a085ad9a2cf2b') in 0.025781 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/physicsimgs/page-073.png
+  artifactKey: Guid(0c80782dd2892ab4699c10a208b7a67e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-073.png using Guid(0c80782dd2892ab4699c10a208b7a67e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '614137164eb40de009fd475e07cda754') in 0.028947 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.001602 seconds.
+  path: Assets/physicsimgs/page-074.png
+  artifactKey: Guid(e8921a531c38464408c0516204fca9ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-074.png using Guid(e8921a531c38464408c0516204fca9ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd24be20d13acb5184dfc2a73398b08b0') in 0.024919 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/physicsimgs/page-062.png
+  artifactKey: Guid(bd7877cb38732fb439d7614dcc44f70e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-062.png using Guid(bd7877cb38732fb439d7614dcc44f70e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ed62ca70a6502abc6905c270091e35f') in 0.024471 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/physicsimgs/page-022.png
+  artifactKey: Guid(d0ec49bfcc6b7454594e2ae9af1d111f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-022.png using Guid(d0ec49bfcc6b7454594e2ae9af1d111f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e595cd60fb1bd64570f7cc5673dc52fa') in 0.024236 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/physicsimgs/page-025.png
+  artifactKey: Guid(2655539272e349a4cadc04fd456dc830) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-025.png using Guid(2655539272e349a4cadc04fd456dc830) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae0465a07b393edaa0407065fdb35153') in 0.024313 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/physicsimgs/page-037.png
+  artifactKey: Guid(f067ea8709d55cd4298f00a93d9ae7da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-037.png using Guid(f067ea8709d55cd4298f00a93d9ae7da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a10083cc8058e28bb6cdad1ce319610c') in 0.027148 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/physicsimgs/page-043.png
+  artifactKey: Guid(51f2b10cf13cb284e878a48994e6f0b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-043.png using Guid(51f2b10cf13cb284e878a48994e6f0b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e227aa9c073b95d8489af63c20c04598') in 0.026506 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/physicsimgs/page-060.png
+  artifactKey: Guid(3f6df3974f4cce24fb07123d094eea09) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-060.png using Guid(3f6df3974f4cce24fb07123d094eea09) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'abba78eb820d5e784162fb594a291313') in 0.025355 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/physicsimgs/page-024.png
+  artifactKey: Guid(255161fae9af89145885afa5fa89d6ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-024.png using Guid(255161fae9af89145885afa5fa89d6ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65324207571daaefabdfb4e5610f0d51') in 0.027668 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/physicsimgs/page-068.png
+  artifactKey: Guid(b31dd577be7a6cb428b15e244d0ec879) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-068.png using Guid(b31dd577be7a6cb428b15e244d0ec879) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79aeb93f3653346550132d3c9892d1e5') in 0.025718 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/physicsimgs/page-014.png
+  artifactKey: Guid(c0094d4f4c422564daa2a01b0081535f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-014.png using Guid(c0094d4f4c422564daa2a01b0081535f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73f197ad2ef7cd6b3edb0a20ee506ea7') in 0.033065 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/physicsimgs/page-054.png
+  artifactKey: Guid(e61c0c3032d12d24aa1e2f3f204be92c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-054.png using Guid(e61c0c3032d12d24aa1e2f3f204be92c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '309e0d492664ae623102f44cb9c7e77a') in 0.029104 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/physicsimgs/page-018.png
+  artifactKey: Guid(319e2097c32b01c47abf1cb04b20507b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-018.png using Guid(319e2097c32b01c47abf1cb04b20507b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03dd85f0da05774d629285aa9e53249d') in 0.027942 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/physicsimgs/page-030.png
+  artifactKey: Guid(57ffd72e223586544aa44720f4170e4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-030.png using Guid(57ffd72e223586544aa44720f4170e4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e60e144c7718d91730a47c4564214e3') in 0.026739 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/physicsimgs/page-053.png
+  artifactKey: Guid(23f6516abcfaeec44b3b952003a2d8a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-053.png using Guid(23f6516abcfaeec44b3b952003a2d8a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '086bd205dc4d81bf5ce7a2f228b82251') in 0.026188 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/physicsimgs/page-017.png
+  artifactKey: Guid(ad087ea2005ea1a4a8a500982bc9dbcf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-017.png using Guid(ad087ea2005ea1a4a8a500982bc9dbcf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '464a2c8d4e8d6558dc521cbfb5239257') in 0.027757 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/physicsimgs/page-046.png
+  artifactKey: Guid(521d487cf6137a1448c32bba956a48b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-046.png using Guid(521d487cf6137a1448c32bba956a48b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bef3701a7683a6847251a995bfe80bc') in 0.027782 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/physicsimgs/page-031.png
+  artifactKey: Guid(e6c0f0a895ad80f47abbeb2ce1f59403) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-031.png using Guid(e6c0f0a895ad80f47abbeb2ce1f59403) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7afab35ca16fda503ca4225d1f26cc2') in 0.027814 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/physicsimgs/page-019.png
+  artifactKey: Guid(6b41b70ce15e2e24489fb009cb563974) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-019.png using Guid(6b41b70ce15e2e24489fb009cb563974) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ee1f4ffd204f750dc1f67b0f5287eb5') in 0.032602 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/physicsimgs/page-052.png
+  artifactKey: Guid(c162416a2545cbd4eb607e850e755cec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-052.png using Guid(c162416a2545cbd4eb607e850e755cec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2135b6d2a0670bb5f003934adfafa4f') in 0.031413 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/physicsimgs/page-016.png
+  artifactKey: Guid(b0df7414ec77fff4c8f1e6fbbc2bd6ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-016.png using Guid(b0df7414ec77fff4c8f1e6fbbc2bd6ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3e89f15ceb031c6a726cd1aae6b62be') in 0.026853 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/physicsimgs/page-044.png
+  artifactKey: Guid(6516ae85de8d18a4abaae7817892acfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-044.png using Guid(6516ae85de8d18a4abaae7817892acfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d93ea6995c4b16c7638e3bfcc2bb0aa') in 0.027578 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/physicsimgs/page-056.png
+  artifactKey: Guid(e74c21fa9fd1be84db2c5f9f139720f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-056.png using Guid(e74c21fa9fd1be84db2c5f9f139720f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c7d23d50e0c80bd4b7a843de2666dd4a') in 0.027995 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/physicsimgs/page-015.png
+  artifactKey: Guid(3aea7fadee648df458e2b63ddebf9a34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-015.png using Guid(3aea7fadee648df458e2b63ddebf9a34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9caa90c06ea5083215eea25a885b4f7d') in 0.031116 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/physicsimgs/page-034.png
+  artifactKey: Guid(cad23b2cae96eb444a939c93fb42ee39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-034.png using Guid(cad23b2cae96eb444a939c93fb42ee39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f2293ea9858c96f26eec3cf9c25d9cc') in 0.027705 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000076 seconds.
+  path: Assets/physicsimgs/page-033.png
+  artifactKey: Guid(9921ba8f23a92894a8e2a6b1c76768ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-033.png using Guid(9921ba8f23a92894a8e2a6b1c76768ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bcb82bce524e0673e0cfa544275ada4d') in 0.029893 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/physicsimgs/page-023.png
+  artifactKey: Guid(97f8ac256d9134947b85759d49acec32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-023.png using Guid(97f8ac256d9134947b85759d49acec32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea6d8c5cbe0c93eea2d23fc9264c710d') in 0.027139 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/physicsimgs/page-045.png
+  artifactKey: Guid(f52c7b83a61281940aad509221397459) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/physicsimgs/page-045.png using Guid(f52c7b83a61281940aad509221397459) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f96b251720440938446ba33ec20b12d5') in 0.030265 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
