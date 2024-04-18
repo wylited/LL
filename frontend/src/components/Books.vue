@@ -49,15 +49,21 @@
 
             <h2 class = "sub">View all Contributions</h2>
             <h4>Total number of resources: {{ post['resources'].length }}</h4>
-            <li class = "here" v-for="cont in post['resources']">
-            
-                <h3 class = "ititle">{{ cont.title }}</h3>
-                <p>{{ cont.description }}</p>
-                <p class = "cont">Contributed by {{ cont.author }}</p>
-                <p>current score is {{ cont.collab_score }}</p>
-                <button @click="AddScore(cont.book_isbn,cont.id,cont.collab_score)">Add 1</button>
-                <button @click="RemoveScore(cont.book_isbn,cont.id,cont.collab_score)">Remove 1</button>
-                
+            <input value = "0" placeholder = "to" class = "to" type="to" v-model="to" />
+            <input value = "1000" placeholder = "from" class = "from" type="from" v-model="from" />
+            <br>
+            <li class = "here1" v-for="cont in post['resources']">
+                <div class = "here" v-if="cont.page_number>=to && cont.page_number<=from">
+                    <h3 class = "ititle">{{ cont.title }}</h3>
+                    <p>{{ cont.description }}</p>
+                    <p class = "cont">Contributed by {{ cont.author }}</p>
+                    <p>current score is {{ cont.collab_score }}</p>
+                    <button @click="AddScore(cont.book_isbn,cont.id,cont.collab_score)">Add 1</button>
+                    <button @click="RemoveScore(cont.book_isbn,cont.id,cont.collab_score)">Remove 1</button>
+                </div>
+                <div v-else class = "gone">
+                    <h2>bruh</h2>
+                </div>
             </li>
         </div>
 
@@ -69,6 +75,18 @@
 
 <style scoped>
 
+.to {
+    display:inline-block;
+}
+
+.from { 
+    display:inline-block;
+}
+
+.gone {
+    display:none;
+}
+
 .cont {
     font-style: italic;
 }
@@ -78,13 +96,18 @@
 }
 
 .here {
-    list-style: none;
     display: inline-block;
     background-color: grey;
     margin:1vw;
     min-height:5vw;
     min-width:10vw;
     padding:1vw;
+    
+}
+
+.here1 {
+    list-style: none;
+    display:inline-block;
 }
 
 
@@ -160,7 +183,9 @@ h1 {
         desc: '',
         title: '',
         author:'',
-        selectedFile : null
+        selectedFile : null,
+        to: '',
+        from:'',
       }
     },
     created() {
@@ -196,6 +221,8 @@ h1 {
             .then(response => console.log(response))
     },
     async fetchData(id) {
+        this.to = 0
+        this.from = 1000
         this.error = this.post = null
         this.loading = true
 
