@@ -44,6 +44,7 @@
                 <h2 class = "prev">Preview</h2>
                 <h3>⠀{{ title }}</h3>
                 <p>⠀{{ desc }}</p>
+                <img :src="prevFile" class="imgPrev" />
                 <p class = "bot">Submitted by {{ author }}</p>
             </div>
         </div>
@@ -86,6 +87,13 @@
 
 
 <style scoped>
+
+.imgPrev {
+    margin-left:2vw;
+    max-width:300px;
+    max-height:250px;
+    margin-right:auto;
+}
 
 .page {
     float:right;
@@ -176,8 +184,6 @@
 }
 
 .bot {
-    font-style: italic;
-    margin-top:40%;
 }
 
 .to {
@@ -321,7 +327,8 @@ h1 {
         data.append('file', event.target.files[0]); 
         this.filename = event.target.files[0].name;
         this.dat = data;
-        this.prevFile = event.target.files[0]
+        this.prevFile = URL.createObjectURL(event.target.files[0])
+
         
     },
     AddScore(ib,id,score) {
