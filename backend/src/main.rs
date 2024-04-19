@@ -1,6 +1,6 @@
 use axum::{
     body::{to_bytes, Body},
-    extract::{Json, Path},
+    extract::{Json, Path, Multipart},
     http::{StatusCode, HeaderMap},
     routing::{get, post},
     Router, response::{IntoResponse},
@@ -11,7 +11,7 @@ use serde::{Deserialize, Serialize};
 use tokio::io::AsyncReadExt;
 use tokio_util::io::ReaderStream;
 use tower_http::{cors::CorsLayer, trace::TraceLayer};
-use std::{collections::HashMap, fs, path::Path as FilePath, process::Command, io::Read};
+use std::{collections::HashMap, fs, path::{Path as FilePath, PathBuf}, process::Command, io::Read};
 use tracing::info;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -248,11 +248,19 @@ async fn post_resources(
 
 async fn post_resource_file(
     Path((isbn, resource_id)): Path<(u64, String)>,
-    body: Body,
-) -> (StatusCode, Json<String>) {
-    let file_bytes = to_bytes(body, usize::MAX).await.unwrap();
-    save_resource_file(isbn, resource_id.clone(), file_bytes.to_vec());
-    (StatusCode::CREATED, Json(resource_id))
+    mut multipart: Multipart,
+) -> StatusCode {
+    while let Some(mut field) = multipart.next_field().await.unwrap() {
+        let mut buffer = Vec::new();
+        while let Some(chunk) = field.chunk().await.unwrap() {
+            buffer.extend_from_slice(&chunk);
+        }
+        let field_name = field.name().unwrap();
+        if field_name == "file" {
+            save_resource_file(isbn, resource_id.clone(), buffer);
+        }
+    }
+    StatusCode::CREATED
 }
 
 async fn post_collab_score(
