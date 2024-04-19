@@ -42,13 +42,15 @@ public class ImageTracker : MonoBehaviour
                 foreach (var texturePair in textures)
                 {
                     var pageNumber = "page-0" + texturePair.Key;
+                    Debug.Log("Resource on Page Number: " + pageNumber);
                     var texture = texturePair.Value;
-                    var ratio = texture.width / texture.height;
+                    float ratio = (float)texture.width / texture.height;
+                    Debug.Log("Texture ratio: " + ratio);
 
                     if (texture != null && 14 <= texturePair.Key && 22 >= texturePair.Key ) {
                         Renderer planeRenderer = planeRenderers[texturePair.Key - 12];
                         planeRenderer.sharedMaterial.mainTexture = texture;
-                        Vector3 scale = new Vector3(0.3f * ratio, 0.3f, 0.3f);
+                        Vector3 scale = new Vector3(0.008f * ratio, 0.008f, 0.008f);
                         planeRenderer.transform.localScale = scale;
                     }
                     else {
