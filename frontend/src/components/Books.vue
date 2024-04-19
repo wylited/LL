@@ -36,7 +36,7 @@
                     <p>What is your name?</p>
                     <input placeholder = "Author" class = "inp" type="author" v-model="author" />
                     <p>What is the page reference?</p>
-                    <input placeholder = "Page Reference" class = "inp" type="author" v-model="author" />
+                    <input placeholder = "Page Reference" class = "inp" type="pref" v-model="pref" />
                     <button @click="submit">Submit</button>
                 </div>
             </div>
@@ -45,7 +45,6 @@
                 <h3>⠀{{ title }}</h3>
                 <p>⠀{{ desc }}</p>
                 <p class = "bot">Submitted by {{ author }}</p>
-                <img v-if = "dat!=null" :src = dat.file>
             </div>
         </div>
         <div class = "cont">
@@ -58,12 +57,15 @@
             <br>
             <li class = "here1" v-for="cont in post['resources']">
                 <div class = "here" v-if="cont.page_number>=to && cont.page_number<=from">
+                    <p class = "page">Page {{ cont.page_number }}</p>
                     <h3 class = "ititle">{{ cont.title }}</h3>
+                    
                     <p>{{ cont.description }}</p>
                     <a :href = "'http://188.166.250.75:3000/api/resources/' + cont.book_isbn + '/' + cont.id">
                         <img class = "contImg" :src = "'http://188.166.250.75:3000/api/resources/' + cont.book_isbn + '/' + cont.id" alt = "No Image">
                     </a>
                     <p class = "cont2">Contributed by {{ cont.author }}</p>
+                    
                     <p class = "inlsc">{{ cont.collab_score }}</p>
                     <button class = "adds" @click="AddScore(cont.book_isbn,cont.id,cont.collab_score)">Add 1</button>
                     
@@ -85,6 +87,11 @@
 
 <style scoped>
 
+.page {
+    float:right;
+    font-style: italic;
+}
+
 .contImg {
     width:300px;
 }
@@ -97,7 +104,6 @@
 
 .inlsc {
     text-align: center;
-    font-style: italic;
     color: rgb(54, 54, 54);
     margin-left:auto;
     margin-right:auto;
@@ -223,7 +229,7 @@ h1 {
 .preview {
     background-color: rgb(41, 41, 41);
     border-radius: 10px;
-    min-width:20vw;
+    width:20vw;
     margin-left:7vw;
     
     padding:1vw;
@@ -294,6 +300,8 @@ h1 {
         previewImage:null,
         dat:null,
         filename:null,
+        prevFile:null,
+        pref:'',
       }
     },
     created() {
@@ -313,6 +321,7 @@ h1 {
         data.append('file', event.target.files[0]); 
         this.filename = event.target.files[0].name;
         this.dat = data;
+        this.prevFile = event.target.files[0]
         
     },
     AddScore(ib,id,score) {
@@ -390,13 +399,13 @@ h1 {
         
         console.log("filename:")
         if (this.dat==null) {
-            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: "nofileLMAO", page_number: 10, collab_score: 0})
+            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: "nofileLMAO", page_number: parseInt(this.pref), collab_score: 0})
             .then(response => console.log(response))
             console.log("Null File")
         }
         else {
             console.log("Not Null File")
-            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: this.filename, page_number: 10, collab_score: 0})
+            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: this.filename, page_number: parseInt(this.pref), collab_score: 0})
             .then(response => console.log(response))
             
             let config = {
