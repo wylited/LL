@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18029143, g: 0.22572419, b: 0.30693057, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1067,6 +1067,15 @@ MonoBehaviour:
   ArPrefabs:
   - {fileID: 4064600025048958644, guid: 879a95379a5454046a9ed296ec63a5fc, type: 3}
   - {fileID: 34530042649954887, guid: 0586537c6042f0e449f6ab57eb9578ac, type: 3}
+  - {fileID: 9020334639134976440, guid: e78e02b0b7f88195b8179d5a0ef66ccd, type: 3}
+  - {fileID: 9020334639134976440, guid: 1ffe07dc70cc987e78b0ac37f8a0e737, type: 3}
+  - {fileID: 9020334639134976440, guid: d767d882e8655656ea0b9f4878417a8d, type: 3}
+  - {fileID: 9020334639134976440, guid: 22ffecfc792ec012197a18e3374d32bc, type: 3}
+  - {fileID: 9020334639134976440, guid: 3a15b405cd8eb322a83d549ccd075284, type: 3}
+  - {fileID: 9020334639134976440, guid: e54f72dd3d0d294d29146ed3230dd80c, type: 3}
+  - {fileID: 9020334639134976440, guid: e29e65dd1ddc2a2359a1ea677fee46ba, type: 3}
+  - {fileID: 9020334639134976440, guid: 081e8a0caf32b998ca3c08b66016581a, type: 3}
+  - {fileID: 9020334639134976440, guid: 8bae661b587ba3078855cebd984b72df, type: 3}
 --- !u!114 &1186359223
 MonoBehaviour:
   m_ObjectHideFlags: 0

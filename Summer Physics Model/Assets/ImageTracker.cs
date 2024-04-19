@@ -111,6 +111,29 @@ public class ImageTracker : MonoBehaviour
         StartCoroutine(DownloadandLoadTextures());
     }
 
+    void Update()
+    {
+        outputTracking();
+    }
+
+    void outputTracking()
+    {
+        int i = 0; //counter
+
+        foreach(var trackedImage in trackedImages.trackables)
+        {
+            if (trackedImage.trackingState == TrackingState.Limited)
+            {
+                ARObjects[i].SetActive(false);
+            }
+            if (trackedImage.trackingState == TrackingState.Tracking)
+            {
+                ARObjects[i].SetActive(true);
+            }
+            i++;
+        }
+    }
+
     void OnEnable()
     {
         trackedImages.trackedImagesChanged += OnTrackedImagesChanged;
