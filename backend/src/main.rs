@@ -6,8 +6,6 @@ use axum::{
     Router, response::{IntoResponse},
 };
 
-
-
 use serde::{Deserialize, Serialize};
 
 use tokio_util::io::ReaderStream;
@@ -42,6 +40,11 @@ struct Resource {
     file_name: String,
     collab_score: i64,
     page_number: u32,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+struct Resources{
+    resources: Vec<Resource>,
 }
 
 #[tokio::main]
@@ -86,6 +89,7 @@ async fn main() {
             "/api/resources/:isbn",
             get(get_resources).post(post_resources),
         )
+        .route("/api/resources/:isbn/unity", get(get_unity_resources))
         .route(
             "/api/resources/:isbn/:id",
             get(get_resource_file).post(post_resource_file),
@@ -127,6 +131,15 @@ async fn get_resources(Path(isbn): Path<u64>) -> Json<Vec<Resource>> {
     Json(load_resources(isbn))
 }
 
+async fn get_unity_resources(Path(isbn): Path<u64>) -> Json<Resources> {
+    let vec: Vec<Resource> = load_resources(isbn);
+    let resources = Resources {
+        resources: vec,
+    };
+    Json(resources)
+}
+
+
 async fn get_resource_file(
     Path((isbn, resource_id)): Path<(u64, String)>) -> impl IntoResponse {
     let resource = load_resources(isbn).into_iter().find(|r| r.id == resource_id).unwrap();
@@ -142,7 +155,8 @@ async fn get_resource_file(
             "attachment; filename=\"resource.txt\"".parse().unwrap(),
         );
         return (StatusCode::OK, headers, body);
-    } else {
+    }
+    else {
         let mut headers = HeaderMap::new();
         headers.insert("Content-Type", "image/jpeg;".parse().unwrap());
         headers.insert(
