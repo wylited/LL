@@ -8,8 +8,9 @@ use axum::{
 
 use serde::{Deserialize, Serialize};
 
+use tokio::io::AsyncReadExt;
 use tokio_util::io::ReaderStream;
-use tower_http::cors::CorsLayer;
+use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use std::{collections::HashMap, fs, path::Path as FilePath, process::Command, io::Read};
 use tracing::info;
 
@@ -50,7 +51,7 @@ struct Resources{
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt()
-        .with_max_level(tracing::Level::INFO)
+        .with_max_level(tracing::Level::DEBUG)
         .init();
 
     if !FilePath::new("books.json").exists() {
@@ -96,6 +97,7 @@ async fn main() {
         )
         .route("/api/resources/:isbn/:id/image", get(get_resource_image))
         .route("/api/resources/:isbn/:id/:score", post(post_collab_score))
+        .layer(TraceLayer::new_for_http())
         .layer(CorsLayer::permissive());
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
@@ -173,7 +175,8 @@ async fn get_resource_image(
     let resource = load_resources(isbn).into_iter().find(|r| r.id == resource_id).unwrap();
     let file = load_resource_file(isbn, resource_id).await;
     if resource.file_name.ends_with(".txt") {
-        text_to_image(resource.file_name).await;
+        let text_file = fs::read_to_string(format!("{}/{}", isbn, resource.file_name)).unwrap();
+        text_to_image(text_file).await;
         let imgfile = tokio::fs::File::open("output.jpg").await.unwrap();
         let stream = ReaderStream::new(imgfile);
         let body = Body::from_stream(stream);
