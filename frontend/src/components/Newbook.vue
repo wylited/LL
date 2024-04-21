@@ -13,32 +13,55 @@
                 <input placeholder = "Front Cover Image URL" class = "inp" type="bookimgURL" v-model="bookimgURL" />
                 <p>Add the primary author of your textbook</p>
                 <input placeholder = "Author" class = "inp" type="bookAuthor" v-model="bookAuthor" />
-            </div>
+                <br>
+                <button @click="submit">Submit</button>
+              </div>
         </div>
         <div class = "preview">
-            <h2>Preview</h2>
-            <p>Book Title is: {{ bookTitle }}</p>
-            <p>ISBN is: {{ bookISBN }}</p>
-            <p>img url is: {{ bookimgURL }}</p>
-            <img :src = bookimgURL alt = "Image not loaded">
-            <p>author is: {{ bookAuthor }}</p>
+            <h2 class = "prevtxt">Preview</h2>
+            <p>Title: {{ bookTitle }}</p>
+            <p>ISBN: {{ bookISBN }}</p>
+            <img class = "img2":src = bookimgURL alt = "Image not loaded">
+            <p>Written by: {{ bookAuthor }}</p>
         </div>
     
-        <button @click="submit">Submit</button>
+        
     </div>
   </template>
   
 <style>
 
+  .img2 {
+    max-width: 30vw;
+  }
+
+  .prevtxt {
+    font-style: italic;
+    color:rgb(111, 111, 111);
+  }
+
+  .preview {
+    background-color: rgb(41, 41, 41);
+    border-radius: 10px;
+    margin-left: 4vw;
+    padding:2vw;
+    min-width:30vw;
+    display:inline-block;
+
+  }
+
+  .inpSchema {
+    background-color: rgb(41, 41, 41);
+    border-radius: 10px;
+    padding:1vw;
+    display:inline-block;
+  }
   
   .left {
     display:inline-block;
   }
 
-  .preview {
 
-    display:inline-block;
-  }
 
   .sub {
     font-style: italic;
@@ -73,11 +96,17 @@
         },
         methods: {
         submit() {
+            
             console.log(this.bookISBN)
             axios.post('http://188.166.250.75:3000/api/books', { isbn: parseInt(this.bookISBN), title: this.bookTitle, authors: [this.bookAuthor], image_url: this.bookimgURL })
-            .then(response => alert("Book successfully added!"))
+            .then(response => {
+            alert("Book successfully added!")
+            router.push('/')
+            }
+          )
             .except(error => alert("There was an error in creating your repository. Please try again later."))
             console.log('posted fr (i hope)')
+
         }
         }
     }

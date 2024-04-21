@@ -66,18 +66,13 @@ nav {
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
   display: inline-block;
-  font-family: "Nunito Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100,
-    "YTLC" 500;
+
 }
 
 .link {
+  font-family: "Spectral", serif;
   font-size: medium;
-  color:rgb(79, 214, 158);
+  color:rgb(27, 169, 110);
   padding:.5vw 2vw;
   text-decoration: none;
 }
@@ -93,7 +88,6 @@ nav {
   display: inline-block;
   margin:0vw 3vw;
   margin-top:2vw;
-  font-family: "Spectral", serif;
   font-weight: 400;
   font-style: normal;
 }

@@ -40,7 +40,7 @@
                     <button @click="submit">Submit</button>
                 </div>
             </div>
-            <div class = "preview">
+            <div class = "prev4">
                 <h2 class = "prev">Preview</h2>
                 <h3>⠀{{ title }}</h3>
                 <p>⠀{{ desc }}</p>
@@ -139,6 +139,11 @@
 .prev {
     color: rgb(145, 145, 145);
     font-style: italic;
+    display:inline-block;
+}
+
+.preview {
+    background-color: red;
 }
 
 .adds {
@@ -167,7 +172,7 @@
 }
 
 .left {
-    background-color: rgb(41, 41, 41);
+    
     border-radius: 10px;
     padding: 1vw;
 }
@@ -215,6 +220,7 @@
     margin:1vw;
     min-height:5vw;
     min-width:10vw;
+    max-width:300px;
     padding:1vw;
     
 }
@@ -224,6 +230,15 @@
     display:inline-block;
 }
 
+.prev4 {
+    background-color: red;
+    width:20vw;
+    display:inline-block;
+    background-color: rgb(41, 41, 41);
+    border-radius: 10px;
+    margin-left:1vw;
+    padding:1vw;
+}
 
 h1 {
     color:red;
@@ -231,15 +246,6 @@ h1 {
 }
 
 
-
-.preview {
-    background-color: rgb(41, 41, 41);
-    border-radius: 10px;
-    width:20vw;
-    margin-left:7vw;
-    
-    padding:1vw;
-}
 
 .sub {
     margin-top:5vw;
@@ -274,8 +280,15 @@ h1 {
 .mainBod {
     display: inline-block;
     margin:2vw 4vw;
-    width:65%;
 
+}
+
+.preview {
+    background-color: rgb(63, 0, 0);
+    border-radius: 10px;
+    margin-left:1vw;
+    padding:1vw;
+    width:1px;
 }
 
 .author {
@@ -394,6 +407,9 @@ h1 {
         }
     },
     submit() {
+
+        console.log(this.pref);
+        
         function getRandomInt(min, max) {
             const minCeiled = Math.ceil(min);
             const maxFloored = Math.floor(max);
@@ -439,7 +455,7 @@ h1 {
         "author": this.author,
         "description": this.desc,
         "file_name": "test.txt",
-        "page_number": "12",
+        "page_number": this.pref,
         "collab_score": 0
       })
 
