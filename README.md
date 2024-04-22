@@ -6,7 +6,7 @@ A hackathon project made for CIS Hackathon 2024 (Apr 14 - Apr 20), centerred abo
 ## Setup and Installation of Unity
 1) Download unity hub and the LTS unity editor
 2) Clone the github repo, (CLI, Github Desktop, GitKraken, the web interface)
-3) Import the subdirectory, unity/, as a project into unity hub
+3) Import the subdirectory, ARUnity/, as a project into unity hub
 4) Test if everything works.
 
 ## Development
