@@ -1,7 +1,7 @@
 <template>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
   <nav>
     <h1 class="title inl">Learner's Library</h1>
     <RouterLink class = "inl link" to="/">Your Library</RouterLink>
@@ -66,14 +66,13 @@ nav {
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
   display: inline-block;
-  font-family: "Spectral", serif;
-  font-weight: 600;
-  font-style: normal;
+
 }
 
 .link {
+  font-family: "Spectral", serif;
   font-size: medium;
-  color:rgb(79, 214, 158);
+  color:rgb(27, 169, 110);
   padding:.5vw 2vw;
   text-decoration: none;
 }
@@ -89,7 +88,6 @@ nav {
   display: inline-block;
   margin:0vw 3vw;
   margin-top:2vw;
-  font-family: "Spectral", serif;
   font-weight: 400;
   font-style: normal;
 }

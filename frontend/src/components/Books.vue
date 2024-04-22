@@ -18,50 +18,60 @@
             <h2 class = "title">{{ post['title'] }}</h2>
             <p class = "author">{{ post['authors'][0] }}, {{ post['isbn'] }}</p>
             
-
             <h2 class = "sub">Add a Contribution</h2>
 
             <div class = "left">
                 <div class = "inpSchema">
                     <p>Add the title of your resource</p>
-                    <input placeholder = "Title" class = "inp" type="title" v-model="title" />
+                    <input placeholder = "Title" class = "inp title1" type="title" v-model="title" />
                     <p>Add a description to your resource</p>
-                    <input placeholder = "Description" class = "inp" type="desc" v-model="desc" />
+                    <textarea rows="2" cols="25" placeholder = "Description" class = "inp descr" type="desc" v-model="desc"></textarea>
                     <p>Upload your file</p>
                     <input
                         type="file"
                         @change="Images_onFileChanged($event)"
-                        accept="image/*"
+                        accept="image/jpeg"
                         capture
                     />
                     <p>What is your name?</p>
                     <input placeholder = "Author" class = "inp" type="author" v-model="author" />
+                    <p>What is the page reference?</p>
+                    <input placeholder = "Page Reference" class = "inp" type="pref" v-model="pref" />
                     <button @click="submit">Submit</button>
                 </div>
             </div>
-            <div class = "preview">
-                <h2>Preview</h2>
-                <h3>{{ title }}</h3>
-                <p>{{ desc }}</p>
+            <div class = "prev4">
+                <h2 class = "prev">Preview</h2>
+                <h3>⠀{{ title }}</h3>
+                <p>⠀{{ desc }}</p>
+                <img :src="prevFile" class="imgPrev" />
                 <p class = "bot">Submitted by {{ author }}</p>
-                <img :src = selectedFile>
             </div>
         </div>
         <div class = "cont">
             <h2 class = "sub">View all Contributions</h2>
             <h4>Total number of resources: {{ post['resources'].length }}</h4>
-            <input value = "0" placeholder = "to" class = "to" type="to" v-model="to" />
-            <input value = "1000" placeholder = "from" class = "from" type="from" v-model="from" />
+            <p class = "d">From page   </p>
+            <input value = "0" placeholder = "to" class = "to pg" type="to" v-model="to" />
+            <p class = "d">to   </p>
+            <input value = "1000" placeholder = "from" class = "from pg" type="from" v-model="from" />
             <br>
             <li class = "here1" v-for="cont in post['resources']">
                 <div class = "here" v-if="cont.page_number>=to && cont.page_number<=from">
+                    <p class = "page">Page {{ cont.page_number }}</p>
                     <h3 class = "ititle">{{ cont.title }}</h3>
+                    
                     <p>{{ cont.description }}</p>
-                    <img v-if="cont.image_url != 'nofileLMAO'" src ="https://google.com"> 
-                    <p class = "cont">Contributed by {{ cont.author }}</p>
-                    <p>current score is {{ cont.collab_score }}</p>
-                    <button @click="AddScore(cont.book_isbn,cont.id,cont.collab_score)">Add 1</button>
-                    <button @click="RemoveScore(cont.book_isbn,cont.id,cont.collab_score)">Remove 1</button>
+                    <a :href = "'http://188.166.250.75:3000/api/resources/' + cont.book_isbn + '/' + cont.id">
+                        <img class = "contImg" :src = "'http://188.166.250.75:3000/api/resources/' + cont.book_isbn + '/' + cont.id" alt = "No Image">
+                    </a>
+                    <p class = "cont2">Contributed by {{ cont.author }}</p>
+                    
+                    <p class = "inlsc">{{ cont.collab_score }}</p>
+                    <button class = "adds" @click="AddScore(cont.book_isbn,cont.id,cont.collab_score)">Add 1</button>
+                    
+                    <button class = "minus" @click="RemoveScore(cont.book_isbn,cont.id,cont.collab_score)">Remove 1</button>
+                    
                 </div>
                 <div v-else class = "gone">
                     <h2>bruh</h2>
@@ -78,29 +88,126 @@
 
 <style scoped>
 
+.imgPrev {
+    margin-left:2vw;
+    max-width:300px;
+    max-height:250px;
+    margin-right:auto;
+}
+
+.page {
+    float:right;
+    font-style: italic;
+}
+
+.contImg {
+    width:300px;
+}
+
+.AddCont {
+    max-width:10vw;
+    background-color: rgb(41, 41, 41);
+    border-radius: 10px;
+}
+
+.inlsc {
+    text-align: center;
+    color: rgb(54, 54, 54);
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.pg {
+    border:none;
+    border-radius: 3px;
+    transition-duration: .2s;
+
+}
+
+.pg:focus {
+    border:none;
+    
+    
+    background-color: rgb(185, 185, 185);
+    outline:none;
+}
+
+.desc {
+    
+}
+
+.prev {
+    color: rgb(145, 145, 145);
+    font-style: italic;
+    display:inline-block;
+}
+
+.preview {
+    background-color: red;
+}
+
+.adds {
+    background-color: rgb(133, 164, 134);
+    border:none;
+    padding:.4vw;
+    border-radius:8px;
+    transition-duration: .3s;
+}
+
+.adds:hover {
+    background-color: rgb(63, 177, 67);
+}
+
+.minus {
+    background-color: rgb(182, 134, 134);
+    border:none;
+    padding:.4vw;
+    float: right;
+    border-radius:8px;
+    transition-duration: .3s;
+}
+
+.minus:hover {
+    background-color: rgb(185, 74, 74);
+}
+
+.left {
+    
+    border-radius: 10px;
+    padding: 1vw;
+}
+
+.d {
+    display: inline-block; 
+    margin-left:1vw;
+    margin-right: 1vw;
+}
+
 .cont {
     margin-left:4vw;
+    min-height: 40vw;
 }
 
 .bot {
-    font-style: italic;
-    margin-top:40%;
 }
 
 .to {
     display:inline-block;
+    width: 3vw;
 }
 
 .from { 
     display:inline-block;
+    width: 3vw;
 }
 
 .gone {
     display:none;
 }
 
-.cont {
+.cont2 {
     font-style: italic;
+    
 }
 
 .ititle {
@@ -113,6 +220,7 @@
     margin:1vw;
     min-height:5vw;
     min-width:10vw;
+    max-width:300px;
     padding:1vw;
     
 }
@@ -122,6 +230,15 @@
     display:inline-block;
 }
 
+.prev4 {
+    background-color: red;
+    width:20vw;
+    display:inline-block;
+    background-color: rgb(41, 41, 41);
+    border-radius: 10px;
+    margin-left:1vw;
+    padding:1vw;
+}
 
 h1 {
     color:red;
@@ -129,15 +246,6 @@ h1 {
 }
 
 
-
-.preview {
-    background-color: rgb(41, 41, 41);
-    min-width:30vw;
-    min-height:30vw;
-    margin-left:7vw;
-    border-radius: 10px;
-    padding:1vw;
-}
 
 .sub {
     margin-top:5vw;
@@ -150,7 +258,8 @@ h1 {
 
 .bookImg {
     display:block;
-    width:300px;
+    width:400px;
+    margin-right:-5vw;
     border-radius:10px;
     display: inline-block;
     float:right;
@@ -171,8 +280,15 @@ h1 {
 .mainBod {
     display: inline-block;
     margin:2vw 4vw;
-    width:65%;
 
+}
+
+.preview {
+    background-color: rgb(63, 0, 0);
+    border-radius: 10px;
+    margin-left:1vw;
+    padding:1vw;
+    width:1px;
 }
 
 .author {
@@ -200,6 +316,11 @@ h1 {
         selectedFile : null,
         to: '',
         from:'',
+        previewImage:null,
+        dat:null,
+        filename:null,
+        prevFile:null,
+        pref:'',
       }
     },
     created() {
@@ -213,7 +334,16 @@ h1 {
       )
     },
     methods: {
-    Images_onFileChanged (event) {this.selectedFile = event.target.files[0];console.log("wow");},
+    Images_onFileChanged (event) {
+        let data = new FormData();
+        data.append('name', 'my-picture');
+        data.append('file', event.target.files[0]); 
+        this.filename = event.target.files[0].name;
+        this.dat = data;
+        this.prevFile = URL.createObjectURL(event.target.files[0])
+
+        
+    },
     AddScore(ib,id,score) {
         this.post.resources.forEach((resc) => {
             if (resc.id == id) {
@@ -277,6 +407,9 @@ h1 {
         }
     },
     submit() {
+
+        console.log(this.pref);
+        
         function getRandomInt(min, max) {
             const minCeiled = Math.ceil(min);
             const maxFloored = Math.floor(max);
@@ -288,18 +421,31 @@ h1 {
 
         
         console.log("filename:")
-        if (this.selectedFile==null) {
-            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: "nofileLMAO", page_number: 10, collab_score: 0})
+        if (this.dat==null) {
+            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: "nofileLMAO", page_number: parseInt(this.pref), collab_score: 0})
             .then(response => console.log(response))
+            console.log("Null File")
         }
         else {
-            const mypostparameters= new FormData()
-            mypostparameters.append('image', this.selectedFile, this.selectedFile.name);
-
-            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: this.selectedFile.name, page_number: 10, collab_score: 0})
+            console.log("Not Null File")
+            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn, { id: x.toString(), book_isbn: parseInt(this.$route.params.isbn), title: this.title, author: this.author, description: this.desc, file_name: this.filename, page_number: parseInt(this.pref), collab_score: 0})
             .then(response => console.log(response))
             
-            axios.post('http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn + '/' + x.toString(), mypostparameters)
+            let config = {
+            header : {
+                'Content-Type' : 'image/png'
+            }
+        }
+
+        axios.post(
+            'http://188.166.250.75:3000/api/resources/' + this.$route.params.isbn + '/' + x, 
+            this.dat,
+            config
+        ).then(
+        response => {
+            console.log('image upload response > ', response)
+        }
+        )
         }
         
         this.post.resources.push({
@@ -309,7 +455,7 @@ h1 {
         "author": this.author,
         "description": this.desc,
         "file_name": "test.txt",
-        "page_number": "12",
+        "page_number": this.pref,
         "collab_score": 0
       })
 
